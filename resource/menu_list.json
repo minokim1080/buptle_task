@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "name": "김치찌개",
+    "restaurant_id": 1,
+    "price": 5000,
+    "time": "아침"
+  },
+  {
+    "id": 2,
+    "name": "된장찌개",
+    "restaurant_id": 1,
+    "price": 50000,
+    "time": "아침"
+  },
+  {
+    "id": 3,
+    "name": "부대찌개",
+    "restaurant_id": 1,
+    "price": 5200,
+    "time": "점심"
+  },
+  {
+    "id": 4,
+    "name": "계란말이",
+    "restaurant_id": 1,
+    "price": 3000,
+    "time": "점심"
+  },
+  {
+    "id": 5,
+    "name": "떡갈비",
+    "restaurant_id": 1,
+    "price": 8000,
+    "time": "저녁"
+  },
+  {
+    "id": 6,
+    "name": "냉면",
+    "restaurant_id": 1,
+    "price": 80000,
+    "time": "저녁"
+  },
+  {
+    "id": 7,
+    "name": "오므라이스",
+    "restaurant_id": 2,
+    "price": 5000,
+    "time": "아침"
+  },
+  {
+    "id": 8,
+    "name": "초밥",
+    "restaurant_id": 2,
+    "price": 50000,
+    "time": "아침"
+  },
+  {
+    "id": 9,
+    "name": "가츠동",
+    "restaurant_id": 2,
+    "price": 5200,
+    "time": "점심"
+  },
+  {
+    "id": 10,
+    "name": "우동",
+    "restaurant_id": 2,
+    "price": 3000,
+    "time": "점심"
+  },
+  {
+    "id": 11,
+    "name": "오꼬노미야끼",
+    "restaurant_id": 2,
+    "price": 8000,
+    "time": "저녁"
+  },
+  {
+    "id": 12,
+    "name": "타코야끼",
+    "restaurant_id": 2,
+    "price": 80000,
+    "time": "저녁"
+  },
+  {
+    "id": 13,
+    "name": "짜장면",
+    "restaurant_id": 3,
+    "price": 5000,
+    "time": "아침"
+  },
+  {
+    "id": 14,
+    "name": "짬뽕",
+    "restaurant_id": 3,
+    "price": 50000,
+    "time": "아침"
+  },
+  {
+    "id": 15,
+    "name": "유린기",
+    "restaurant_id": 3,
+    "price": 5200,
+    "time": "점심"
+  },
+  {
+    "id": 16,
+    "name": "칠리새우",
+    "restaurant_id": 3,
+    "price": 3000,
+    "time": "점심"
+  },
+  {
+    "id": 17,
+    "name": "쟁반짜장",
+    "restaurant_id": 3,
+    "price": 8000,
+    "time": "저녁"
+  },
+  {
+    "id": 18,
+    "name": "울면",
+    "restaurant_id": 3,
+    "price": 80000,
+    "time": "저녁"
+  }
+]
