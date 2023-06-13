@@ -15,7 +15,7 @@ def show_restaurant_list():
     return restaurant_name_list
 
 
-def choose_restaurant(input_restaurant_id: int):
+def choose_restaurant(input_restaurant_id):
     for restaurant in restaurant_list:
         if restaurant['id'] == input_restaurant_id:
             return input_restaurant_id

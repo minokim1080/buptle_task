@@ -6,7 +6,7 @@ with open('./resource/account_list.json', 'r', encoding='utf-8') as f:
 
 
 # 로그인
-def login(input_login_id: str):
+def login(input_login_id):
 
     for account in account_list:
         if account['login_id'] == input_login_id:
