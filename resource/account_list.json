@@ -1,14 +1,22 @@
 [
   {
-    "index": 1,
-    "login_id" : "kimmh0806"
+    "id": 1,
+    "login_id" : "kimmh0806",
+    "role" : 0
   },
   {
-    "index": 2,
-    "login_id" : "미노킴"
+    "id": 2,
+    "login_id" : "미노킴",
+    "role" : 0
   },
   {
-    "index": 3,
-    "login_id" : "미노미노"
+    "id": 3,
+    "login_id" : "미노미노",
+    "role" : 0
+  },
+  {
+    "id": 4,
+    "login_id" : "관리자",
+    "role" : 1
   }
 ]
