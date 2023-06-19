@@ -1,0 +1,17 @@
+[
+  {
+    "start_time": "08:00",
+    "end_time": "11:00",
+    "name" : "아침"
+  },
+  {
+    "start_time": "12:00",
+    "end_time": "17:00",
+    "name" : "점심"
+  },
+  {
+    "start_time": "18:00",
+    "end_time": "22:00",
+    "name" : "저녁"
+  }
+]
