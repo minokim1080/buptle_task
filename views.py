@@ -1,4 +1,7 @@
+import re
+
 from utils import SingletonMeta
+from exception import InvalidInputNumException
 
 
 class AuthView(metaclass=SingletonMeta):
@@ -36,10 +39,11 @@ class MainServiceView(metaclass=SingletonMeta):
 
         if input_num not in restaurant_id_list:
             print('존재하지 않는 번호입니다. 다시 입력해주세요\n')
-            self.show_restaurant_view(restaurant_list)
+            raise InvalidInputNumException('')
 
         return input_num
 
+    # 매개 변수로 받은 메뉴 목록을 보여주고, 결제를 진행합니다.
     def show_menu_view(self, menu_list):
         message = '\n0. 종료'
         menu_id_price_list = [{'id': menu['id'], 'price': menu['price']} for menu in menu_list]
@@ -66,4 +70,33 @@ class MainServiceView(metaclass=SingletonMeta):
                 quit()
 
         print('존재하지 않는 번호입니다. 다시 입력해주세요\n')
-        self.show_menu_view(menu_list)
+        raise InvalidInputNumException('')
+
+    def show_admin_view(self):
+        input_num = int(input('원하시는 작업의 번호를 입력해주세요. 아래는 작업 목록입니다.\n'
+                              '0.종료\n'
+                              '1.일반 주문\n'
+                              '2.식사 시간 변경'))
+
+        if input_num == 0:
+            print('서비스를 종료합니다.')
+            quit()
+
+        if input_num == 1 or input_num == 2:
+            return input_num
+
+        print('존재하지 않는 번호입니다. 다시 입력해주세요\n')
+        raise InvalidInputNumException('')
+
+    def show_change_mealtime_view(self):
+        input_detail = input('변경하려는 시간을 입력해주세요. 입력 양식은 다음과 같습니다.\n'
+                             '아침/점심/저녁 여부, 시작 시간, 종료 시간\n'
+                             '아침, 점심, 저녁은 각각 1,2,3으로 표현합니다.\n'
+                             '아침 시간을 8시에서 13시로 바꾸려면 아래와 같이 입력하면 됩니다.\n'
+                             'ex) 1, 08:00, 13:00\n\n'
+                             '입력하기 : ')
+
+        input_detail = re.sub(r'\s', '', input_detail)  # 공백 없애기
+
+        # '1,08:00,13:00' 형태 확인하는 정규식. 앞 부분은 00~23, 뒷 부분은 00~59만 입력할 수 있다.
+        pattern = r'^[1-3],(?:[01][0-9]|2[0-3]):[0-5][0-9],(?:[01][0-9]|2[0-3]):[0-5][0-9]$'

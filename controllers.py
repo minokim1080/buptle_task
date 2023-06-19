@@ -8,6 +8,7 @@ from models import Restaurant
 from models import Menu
 from models import Mealtime
 from exception import LoginIdNotFoundException
+from exception import InvalidInputNumException
 
 
 class AuthController(metaclass=SingletonMeta):
@@ -33,7 +34,7 @@ class AuthController(metaclass=SingletonMeta):
 
         except LoginIdNotFoundException as e:
             print(e)
-            print('아이디가 존재하지 않습니다.')
+            quit()
 
     # 로그인 시 아이디의 유효성을 검증하는 메소드입니다. 본 클래스 내부에서만 사용합니다.
     def _validate_login_id(self, login_id):
@@ -60,24 +61,60 @@ class MainServiceController(metaclass=SingletonMeta):
             self._start_restaurant_service()
 
         if role == 1:
+            self._start_admin_service()
             Mealtime.change_mealtime()
 
-    # 식당 서비스를 시작하는 메소드입니다. 본 클래스 내부에서만 사용합니다.
+    # 식당 서비스를 시작하는 메소드입니다. 잘못된 값을 입력할 경우 특정 로직을 무한 반복합니다. 본 클래스 내부에서만 사용합니다.
     def _start_restaurant_service(self):
         restaurant_list = Restaurant.find_all_restaurant()
         main_service_view = MainServiceController.main_service_view
 
-        input_restaurant_id = main_service_view.show_restaurant_view(restaurant_list)
+        while True:
+            try:
+                input_restaurant_id = main_service_view.show_restaurant_view(restaurant_list)
+                break
+            except InvalidInputNumException:
+                continue
+            except ValueError:
+                print('존재하지 않는 번호입니다. 다시 입력해주세요\n')
+                continue
 
         self._show_menus(input_restaurant_id)
 
-    # 메뉴를 보여주고 선택 및 결제하는 메소드입니다. 본 클래스 내부에서만 사용합니다.
+    # 메뉴를 보여주고 선택 및 결제하는 메소드입니다. 잘못된 값을 입력할 경우 특정 로직을 무한 반복합니다. 본 클래스 내부에서만 사용합니다.
     def _show_menus(self, restaurant_id):
         main_service_view = MainServiceController.main_service_view
         current_time = datetime.datetime.now()
+        current_time = current_time.time()
+
         time = Mealtime.check_mealtime(current_time)  # 아침, 점심, 저녁 중 해당되는 시간 할당
 
         menu_list = Menu.find_menus_of_restaurant(restaurant_id, time)
 
-        main_service_view.show_menu_view(menu_list)
+        while True:
+            try:
+                main_service_view.show_menu_view(menu_list)
+                break
+            except InvalidInputNumException:
+                continue
+            except ValueError:
+                print('존재하지 않는 번호입니다. 다시 입력해주세요\n')
+                continue
 
+
+    def _start_admin_service(self):
+        main_service_view = MainServiceController.main_service_view
+
+        while True:
+            try:
+                input_num = main_service_view.show_admin_view()
+                break
+            except InvalidInputNumException:
+                continue
+
+        if input_num == 1:
+            self._start_restaurant_service()
+            return
+
+        if input_num ==2:
+            main_service_view.show_change_mealtime_view()

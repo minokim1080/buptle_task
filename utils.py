@@ -21,8 +21,8 @@ class FileUtils(metaclass=SingletonMeta):
         result = []
 
         try:
-            with open(url, 'r', encoding='utf-8') as f:
-                result = json.load(f)
+            with open(url, 'r', encoding='utf-8') as file:
+                result = json.load(file)
 
                 return result
 
@@ -40,3 +40,7 @@ class FileUtils(metaclass=SingletonMeta):
 
         except Exception as e:
             print(e)
+
+    def save_file(self, url, data):
+        with open(url, 'w') as file:
+            json.dump(data, file)

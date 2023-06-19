@@ -10,7 +10,4 @@ login_id = auth_controller.show_login_page()
 
 account = auth_controller.login(login_id)
 
-print(account)
-print(type(account))
-
 main_service_controller.start_service(account)

@@ -26,7 +26,7 @@ class Account:
 
                 return login_account
 
-        raise LoginIdNotFoundException
+        raise LoginIdNotFoundException('아이디를 찾을 수 없습니다.')
 
     def get_role(self):
         return self.role
@@ -88,42 +88,46 @@ class Mealtime(metaclass=SingletonMeta):
 
     @staticmethod
     def check_mealtime(current_time):
-        # mealtime = Mealtime.mealtime
-        # morning_start_time = datetime.strptime('08:00', '%H:%M')
-        # morning_end_time = datetime.strptime('11:00', '%H:%M')
-        # lunch_start_time = datetime.strptime('12:00', '%H:%M')
-        # lunch_end_time = datetime.strptime('17:00', '%H:%M')
-        # dinner_start_time = datetime.strptime('18:00', '%H:%M')
-        # dinner_end_time = datetime.strptime('22:00', '%H:%M')
-        #
-        # for dict in mealtime:
-        #     dict['start_time'] = datetime.strptime(dict['start_time'], '%H:%M')
-        #     dict['end_time'] = datetime.strptime(dict['end_time'], '%H:%M')
-        #
-        #     if dict.get('name') == '아침':
-        #         morning_start_time = dict['start_time']
-        #         morning_end_time = dict['end_time']
-        #
-        #     elif dict.get('name') == '아침':
-        #         lunch_start_time = dict['start_time']
-        #         lunch_end_time = dict['end_time']
-        #
-        #     elif dict.get('name') == '아침':
-        #         dinner_start_time = dict['start_time']
-        #         dinner_end_time = dict['end_time']
-        #
-        # if morning_start_time <= current_time <= morning_end_time:
-        #     return "아침"
-        # elif lunch_start_time <= current_time <= lunch_end_time:
-        #     return "점심"
-        # elif dinner_start_time <= current_time <= dinner_end_time:
-        #     return "저녁"
-        # else:
-        #     print('식사시간이 아닙니다.')
-        #     quit()
-        return "아침"
+        mealtime = Mealtime.mealtime
 
+        for dict in mealtime:
+            dict['start_time'] = datetime.strptime(dict['start_time'], '%H:%M').time()
+            dict['end_time'] = datetime.strptime(dict['end_time'], '%H:%M').time()
+
+            if dict.get('name') == '아침':
+                morning_start_time = dict['start_time']
+                morning_end_time = dict['end_time']
+
+            elif dict.get('name') == '점심':
+                lunch_start_time = dict['start_time']
+                lunch_end_time = dict['end_time']
+
+            elif dict.get('name') == '저녁':
+                dinner_start_time = dict['start_time']
+                dinner_end_time = dict['end_time']
+
+        if morning_start_time <= current_time <= morning_end_time:
+            return "아침"
+        elif lunch_start_time <= current_time <= lunch_end_time:
+            return "점심"
+        elif dinner_start_time <= current_time <= dinner_end_time:
+            return "저녁"
+        else:
+            print('식사시간이 아닙니다.')
+            quit()
+
+    # 특정 시간대의 시간을 변경합니다. 변경하려는 시간은 HH:MM 형태로 입력해야 합니다.
     @staticmethod
-    def change_mealtime():
-        pass
+    def change_mealtime(name, start_time, end_time):
+        mealtime = Mealtime.mealtime
+        file_utils = Mealtime.file_utils
+        mealtime_url = Mealtime.mealtime_url
+
+        for dict in mealtime:
+            if dict['name'] == name:
+                dict['start_time'] = start_time
+                dict['end_time'] = end_time
+                break
+
+        file_utils.save_file(mealtime_url, mealtime)
 
